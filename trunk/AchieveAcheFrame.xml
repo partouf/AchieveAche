@@ -48,6 +48,9 @@
 					<OnEnterPressed>
 						EditBox1_OnEnterPressed();
 					</OnEnterPressed>
+					<OnEscapePressed>
+						EditBox1_OnEscapePressed();
+					</OnEscapePressed>
 				</Scripts>
 			</EditBox>
 			<ScrollFrame name="ScrollFrame1" inherits="UIPanelScrollFrameTemplate">
@@ -119,17 +122,17 @@
 						<Offset x="24" y="-27" />
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						Button3_OnClick(self, button, down);
+					</OnClick>
+				</Scripts>
 				<NormalTexture inherits="UIPanelButtonUpTexture" file="Interface\BUTTONS\UI-RotationRight-Button-Up">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</NormalTexture>
 				<PushedTexture inherits="UIPanelButtonDownTexture" file="Interface\BUTTONS\UI-RotationRight-Button-Down">
 					<TexCoords left="0" right="1" top="0" bottom="1" />
 				</PushedTexture>
-				<Scripts>
-					<OnClick>
-						Button3_OnClick(self, button, down);
-					</OnClick>
-				</Scripts>
 			</Button>
 		</Frames>
 		<Scripts>

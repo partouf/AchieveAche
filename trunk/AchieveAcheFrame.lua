@@ -170,6 +170,10 @@ function EditBox1_OnEnterPressed()
 	Button2_OnClick();
 end
 
+function EditBox1_OnEscapePressed()
+	Button1_OnClick();
+end
+
 function Button3_OnClick()
 	sZone = GetRealZoneText();
 	EditBox1:SetText(sZone);
