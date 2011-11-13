@@ -1,0 +1,151 @@
+﻿<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="AchieveAcheFrame.lua" />
+	<Frame name="AchieveAcheFrame" parent="UIParent" hidden="true" toplevel="true" movable="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="590" y="334" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset x="-31" y="146" />
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="FontString2" inherits="GameFontNormal" text="Show uncompleted only">
+					<Size>
+						<AbsDimension x="154" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="349" y="-30" />
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox name="EditBox1" inherits="InputBoxTemplate">
+				<Size>
+					<AbsDimension x="160" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="54" y="-24" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						EditBox1_OnEnterPressed();
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox>
+			<ScrollFrame name="ScrollFrame1" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="517" y="209" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="24" y="-61" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true">
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="0" />
+					</EdgeSize>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="SearchResults">
+						<Scripts />
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<CheckButton name="CheckButton1" inherits="UICheckButtonTemplate" text="CheckButton1" checked="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="509" y="-24" />
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Button name="Button1" inherits="UIPanelButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="102" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="466" y="-290" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Button1_OnClick(self, button, down);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Button2" inherits="UIPanelButtonTemplate" text="Search">
+				<Size>
+					<AbsDimension x="88" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="234" y="-29" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Button2_OnClick(self, button, down);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Button3" inherits="UIPanelButtonTemplate" text="">
+				<Size>
+					<AbsDimension x="25" y="25" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="24" y="-27" />
+					</Anchor>
+				</Anchors>
+				<NormalTexture inherits="UIPanelButtonUpTexture" file="Interface\BUTTONS\UI-RotationRight-Button-Up">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</NormalTexture>
+				<PushedTexture inherits="UIPanelButtonDownTexture" file="Interface\BUTTONS\UI-RotationRight-Button-Down">
+					<TexCoords left="0" right="1" top="0" bottom="1" />
+				</PushedTexture>
+				<Scripts>
+					<OnClick>
+						Button3_OnClick(self, button, down);
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				AchieveAche_OnLoad(self);
+				self:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnEvent>
+				AchieveAche_OnEvent(self, event, ...);
+			</OnEvent>
+			<OnDragStart>
+				self:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+</Ui>
