@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" DefaultTargets="Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
-    <Name>AchievAche</Name>
+    <Name>AchieveAche</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4edc7199-7a78-455b-98c5-7178d052954e}</ProjectGuid>
-    <AssemblyName>AchievAche</AssemblyName>
-    <RootNamespace>AchievAche</RootNamespace>
+    <AssemblyName>AchieveAche</AssemblyName>
+    <RootNamespace>AchieveAche</RootNamespace>
     <WowPath>D:\World of Warcraft\</WowPath>
-    <AddonTitle>AchievAche</AddonTitle>
+    <AddonTitle>AchieveAche</AddonTitle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
     <OutputPath>.</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="AchievAche.toc">
+    <Content Include="AchieveAche.toc">
       <SubType>TableOfContents</SubType>
     </Content>
     <Content Include="AchieveAcheFrame.xml">
