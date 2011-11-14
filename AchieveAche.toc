@@ -1,5 +1,5 @@
 ## Title: AchieveAche
-## Version: 1.0
+## Version: 1.1
 ## Author: patrick
 ## Interface: 40200
 ## X-LoadOn-Slash: /aa, /achieveache
