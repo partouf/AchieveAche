@@ -171,7 +171,7 @@ function EditBox1_OnEnterPressed()
 end
 
 function EditBox1_OnEscapePressed()
-	Button1_OnClick();
+	EditBox1:ClearFocus();
 end
 
 function Button3_OnClick()

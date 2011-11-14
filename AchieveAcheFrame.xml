@@ -35,7 +35,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<EditBox name="EditBox1" inherits="InputBoxTemplate">
+			<EditBox name="EditBox1" inherits="InputBoxTemplate" autoFocus="false">
 				<Size>
 					<AbsDimension x="160" y="32" />
 				</Size>
