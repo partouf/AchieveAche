@@ -1,7 +1,7 @@
 ## Title: AchieveAche
-## Version: 1.1
+## Version: 1.2
 ## Author: patrick
-## Interface: 40200
+## Interface: 40300
 ## X-LoadOn-Slash: /aa, /achieveache
 
 AchieveAcheFrame.xml
