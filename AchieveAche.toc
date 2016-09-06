@@ -1,7 +1,7 @@
 ## Title: AchieveAche
-## Version: 1.4
+## Version: 1.5
 ## Author: Partouf
-## Interface: 60000
+## Interface: 70000
 ## X-LoadOn-Slash: /aa, /achieveache
 
 AchieveAcheFrame.xml
