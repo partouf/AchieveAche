@@ -41,11 +41,13 @@ function AchieveAche_LoadAchievementsFromApi()
 		c = GetCategoryNumAchievements(catid);
 		for i = 1, c do
 			id, name, points, completed, m, d, y, desc = GetAchievementInfo(catid, i);
-			if completed then
-				AchieveAche_CompletedAchievements[id] = { ["catid"] = catid, ["name"] = name, ["desc"] = desc };
-			else
-				AchieveAche_UncompletedAchievements[id] = { ["catid"] = catid, ["name"] = name, ["desc"] = desc };
-			end			
+			if (id ~= nil) then
+				if completed then
+					AchieveAche_CompletedAchievements[id] = { ["catid"] = catid, ["name"] = name, ["desc"] = desc };
+				else
+					AchieveAche_UncompletedAchievements[id] = { ["catid"] = catid, ["name"] = name, ["desc"] = desc };
+				end
+			end
 		end
 	end
 end
@@ -179,5 +181,3 @@ function Button3_OnClick()
 	EditBox1:SetText(sZone);
 	Button2_OnClick();
 end
-
-
