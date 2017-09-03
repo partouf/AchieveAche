@@ -1,5 +1,5 @@
 ## Title: AchieveAche
-## Version: 1.7
+## Version: 1.8
 ## Author: Partouf
 ## Interface: 70300
 ## X-LoadOn-Slash: /aa, /achieveache
