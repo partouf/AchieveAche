@@ -1,6 +1,6 @@
 ﻿<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="AchieveAcheFrame.lua" />
-	<Frame name="AchieveAcheFrame" parent="UIParent" hidden="true" toplevel="true" movable="true" enableMouse="true">
+	<Frame name="AchieveAcheFrame" inherits="BackdropTemplate" parent="UIParent" hidden="true" toplevel="true" movable="true" enableMouse="true">
 		<Size>
 			<AbsDimension x="590" y="334" />
 		</Size>
@@ -9,17 +9,6 @@
 				<Offset x="-31" y="146" />
 			</Anchor>
 		</Anchors>
-		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<BackgroundInsets>
-				<AbsInset left="11" right="12" top="12" bottom="11" />
-			</BackgroundInsets>
-			<TileSize>
-				<AbsValue val="32" />
-			</TileSize>
-			<EdgeSize>
-				<AbsValue val="32" />
-			</EdgeSize>
-		</Backdrop>
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="FontString2" inherits="GameFontNormal" text="Show uncompleted only">
@@ -53,7 +42,7 @@
 					</OnEscapePressed>
 				</Scripts>
 			</EditBox>
-			<ScrollFrame name="ScrollFrame1" inherits="UIPanelScrollFrameTemplate">
+			<ScrollFrame name="ScrollFrame1" inherits="UIPanelScrollFrameTemplate,BackdropTemplate">
 				<Size>
 					<AbsDimension x="517" y="209" />
 				</Size>
@@ -62,21 +51,13 @@
 						<Offset x="24" y="-61" />
 					</Anchor>
 				</Anchors>
-				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true">
-					<TileSize>
-						<AbsValue val="32" />
-					</TileSize>
-					<EdgeSize>
-						<AbsValue val="0" />
-					</EdgeSize>
-				</Backdrop>
 				<ScrollChild>
 					<Frame name="SearchResults">
 						<Scripts />
 					</Frame>
 				</ScrollChild>
 			</ScrollFrame>
-			<CheckButton name="CheckButton1" inherits="UICheckButtonTemplate" text="CheckButton1" checked="true">
+			<CheckButton name="CheckButton1" inherits="UICheckButtonTemplate" checked="true">
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset x="509" y="-24" />

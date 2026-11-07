@@ -15,6 +15,21 @@ CONST_MOUSEOVERUNIT = "UPDATE_MOUSEOVER_UNIT";
 function AchieveAche_OnLoad(obj)
 	obj:RegisterEvent( CONST_VARSLOADED );
 
+	if obj.SetBackdrop then
+		obj:SetBackdrop({
+			bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+			edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+			tile = true, tileEdge = true, tileSize = 32, edgeSize = 32,
+			insets = { left = 11, right = 12, top = 12, bottom = 11 },
+		});
+	end
+	if ScrollFrame1 and ScrollFrame1.SetBackdrop then
+		ScrollFrame1:SetBackdrop({
+			bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+			tile = true, tileEdge = true, tileSize = 32, edgeSize = 0,
+		});
+	end
+
 	SLASH_ACHACHE1 = "/achieveache";
 	SLASH_ACHACHE2 = "/aa";
 	SlashCmdList["ACHACHE"] = AchieveAche_SlashFunc;
@@ -28,28 +43,50 @@ function AchieveAche_SlashFunc()
 end
 
 function AchieveAche_LoadAchievementsFromApi()
-	AchieveAche_Achievements = {};
+	AchieveAche_Categories = {};
+	AchieveAche_CompletedAchievements = {};
+	AchieveAche_UncompletedAchievements = {};
 
-	list = GetCategoryList();
+	if type(GetCategoryList) ~= "function" then
+		AchieveAche_MessageSelf("AchieveAche: GetCategoryList() not available on this client.");
+		return;
+	end
 
-	c = #list;
-	for i = 1, c do
-		catid = list[i];
-		name, parentid = GetCategoryInfo(catid);
-		AchieveAche_Categories[catid] = { ["name"] = name, ["parentid"] = parentid };
+	local list = GetCategoryList();
+	if type(list) ~= "table" then
+		AchieveAche_MessageSelf("AchieveAche: GetCategoryList() returned no table.");
+		return;
+	end
 
-		c = GetCategoryNumAchievements(catid);
-		for i = 1, c do
-			id, name, points, completed, m, d, y, desc = GetAchievementInfo(catid, i);
-			if (id ~= nil) then
-				if completed then
-					AchieveAche_CompletedAchievements[id] = { ["catid"] = catid, ["name"] = name, ["desc"] = desc };
-				else
-					AchieveAche_UncompletedAchievements[id] = { ["catid"] = catid, ["name"] = name, ["desc"] = desc };
+	local categoryCount = #list;
+	local loadedCompleted, loadedUncompleted = 0, 0;
+
+	for i = 1, categoryCount do
+		local catid = list[i];
+		local cname, parentid = GetCategoryInfo(catid);
+		AchieveAche_Categories[catid] = { name = cname, parentid = parentid };
+
+		local total = GetCategoryNumAchievements(catid);
+		if total and total > 0 then
+			for j = 1, total do
+				local id, aname, points, completed, m, d, y, desc = GetAchievementInfo(catid, j);
+				if id then
+					local entry = { catid = catid, name = aname or "", desc = desc or "" };
+					if completed then
+						AchieveAche_CompletedAchievements[id] = entry;
+						loadedCompleted = loadedCompleted + 1;
+					else
+						AchieveAche_UncompletedAchievements[id] = entry;
+						loadedUncompleted = loadedUncompleted + 1;
+					end
 				end
 			end
 		end
 	end
+
+	AchieveAche_MessageSelf(string.format(
+		"AchieveAche: %d categories, %d completed, %d uncompleted",
+		categoryCount, loadedCompleted, loadedUncompleted));
 end
 
 function AchieveAche_HideAllLabels()
@@ -71,15 +108,12 @@ function AchieveAche_AddToResults( achieveid, info, bIsCompleted )
 	c = #AchieveAche_Labels;
 
 	if AchieveAche_CurLabelIndex > c then
-		label = CreateFrame("SimpleHtml");
-		label:SetParent(SearchResults);
-		label:SetFont('Fonts\\FRIZQT__.TTF', 11);
+		label = CreateFrame("SimpleHtml", nil, SearchResults);
+		label:SetFont("p", 'Fonts\\FRIZQT__.TTF', 11, "");
 		label:SetWidth(450);
 		label:SetScript("OnHyperlinkClick",
 			function(self,link,text,button)
-				if DEFAULT_CHAT_FRAME then
-					ChatFrame_OnHyperlinkShow(DEFAULT_CHAT_FRAME, link, text, button)
-				end
+				SetItemRef(link, text, button, DEFAULT_CHAT_FRAME);
 			end
 		);
 	else
